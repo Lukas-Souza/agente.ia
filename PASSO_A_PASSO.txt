@@ -1,0 +1,180 @@
+=====================================================================
+ PASSO A PASSO - AGENTE DE IA COM LLM (GEMINI)
+ Disciplina de Inteligencia Artificial - Quiz 03
+ Demonstracao para o professor: dia 03/11
+=====================================================================
+
+O QUE E ISSO
+Um chat de Inteligencia Artificial que roda no navegador. Voce digita
+uma pergunta, o Gemini (IA do Google) responde, e o agente lembra de
+tudo que foi conversado (contexto). Tempo para deixar tudo funcionando:
+uns 15 a 20 minutos.
+
+ARQUIVOS QUE VOCE RECEBEU (os nomes precisam ficar EXATAMENTE assim)
+  - app.py              -> o agente (codigo principal)
+  - requirements.txt    -> lista de pacotes que precisam ser instalados
+  - README.md           -> descricao do projeto
+  - PASSO_A_PASSO.txt   -> este guia
+
+Se o navegador ou o WhatsApp renomear algum arquivo (ex.: "app (1).py"),
+renomeie de volta para app.py / requirements.txt.
+
+(Os comandos abaixo sao para Windows. Em Linux/Mac, a unica diferenca
+esta no PASSO 2.)
+
+---------------------------------------------------------------------
+PASSO 0 - CONFERIR SE O PYTHON ESTA INSTALADO
+---------------------------------------------------------------------
+1. Aperte a tecla Windows, digite "cmd" e abra o Prompt de Comando.
+2. Digite:
+       python --version
+3. Precisa aparecer Python 3.10 ou maior (ex.: Python 3.12.4).
+   - Se aparecer erro, tente:  py --version
+   - Se nao tiver Python: baixe em https://www.python.org/downloads
+     e na instalacao MARQUE a caixinha "Add python.exe to PATH".
+     Depois feche e abra o Prompt de Comando de novo.
+
+---------------------------------------------------------------------
+PASSO 1 - CRIAR A PASTA DO PROJETO
+---------------------------------------------------------------------
+1. Crie uma pasta, por exemplo:  C:\agente-ia
+2. Coloque dentro dela os arquivos app.py, requirements.txt e README.md.
+3. Abra o Prompt de Comando DENTRO dessa pasta:
+   abra a pasta no Explorador de Arquivos, clique na barra de endereco
+   (onde aparece C:\agente-ia), apague o texto, digite  cmd  e
+   aperte Enter.
+
+---------------------------------------------------------------------
+PASSO 2 - CRIAR E ATIVAR O AMBIENTE VIRTUAL
+---------------------------------------------------------------------
+No Prompt de Comando aberto na pasta, rode um comando por vez:
+
+    python -m venv .venv
+    .venv\Scripts\activate
+
+Se funcionou, a linha do terminal passa a comecar com (.venv).
+
+  - Se usar o PowerShell e der erro de "execucao de scripts
+    desabilitada", use o Prompt de Comando (cmd) em vez dele.
+  - Linux/Mac:  source .venv/bin/activate
+
+---------------------------------------------------------------------
+PASSO 3 - INSTALAR OS PACOTES
+---------------------------------------------------------------------
+Com o (.venv) ativo, rode:
+
+    pip install -r requirements.txt
+
+Demora de 1 a 3 minutos. Quando terminar sem mensagem vermelha de
+erro, esta pronto.
+
+---------------------------------------------------------------------
+PASSO 4 - GERAR A CHAVE GRATUITA DO GEMINI
+---------------------------------------------------------------------
+1. Acesse https://aistudio.google.com/apikey
+2. Entre com uma conta Google.
+3. Clique em "Create API key" (Criar chave de API). Se pedir um
+   projeto, crie um novo ou escolha o que aparecer.
+4. Copie a chave (comeca com "AIza...") e guarde em um bloco de
+   notas. Voce vai colar no proximo passo.
+
+Cuidados com a chave:
+  - Nao mande a chave em grupo, nao poste em lugar nenhum.
+  - Nao copie a chave para dentro do app.py.
+  - Se perder ou vazar, basta apagar e gerar outra na mesma pagina.
+
+---------------------------------------------------------------------
+PASSO 5 - ABRIR O AGENTE
+---------------------------------------------------------------------
+Ainda no Prompt de Comando, com o (.venv) ativo, rode:
+
+    streamlit run app.py
+
+1. Se o Streamlit perguntar seu e-mail na primeira vez, aperte
+   Enter para pular.
+2. O navegador abre sozinho em http://localhost:8501
+   (se nao abrir, copie esse endereco e cole no navegador).
+3. Na BARRA LATERAL ESQUERDA, cole a chave no campo
+   "Chave da API do Gemini".
+   Se a barra lateral nao aparecer, clique na setinha ">" no canto
+   superior esquerdo da tela.
+4. O campo de conversa aparece embaixo. Pronto!
+
+(Opcional) Em vez de colar a chave toda vez, crie na pasta um arquivo
+chamado .env com uma linha:   GOOGLE_API_KEY=sua_chave_aqui
+Cuidado: o Bloco de Notas pode salvar como ".env.txt". Se for usar,
+salve com "Tipo: Todos os arquivos". Se achar complicado, ignore.
+Colar a chave na barra lateral funciona igual.
+
+---------------------------------------------------------------------
+PASSO 6 - TESTAR (FACA ISSO HOJE, NAO SO NA HORA DA APRESENTACAO)
+---------------------------------------------------------------------
+Digite as mensagens abaixo, na ordem:
+
+  1) "Ola! Meu nome e Joao e estou estudando Inteligencia Artificial."
+  2) "Qual e o meu nome e o que estou estudando?"
+       -> O agente deve responder Joao e Inteligencia Artificial.
+          Isso prova que ele mantem o CONTEXTO da conversa.
+  3) "Explique o que e um LLM em duas frases."
+  4) Clique em "Nova conversa" (barra lateral) e repita a pergunta 2.
+       -> Agora ele NAO deve lembrar, porque o historico foi apagado.
+
+Se os 4 testes funcionaram, o agente esta 100%.
+
+---------------------------------------------------------------------
+PASSO 7 - NA HORA DA APRESENTACAO (DIA 03/11)
+---------------------------------------------------------------------
+Antes da aula:
+  - Deixe o agente ja aberto no navegador e ja testado.
+  - Confira a internet (o agente precisa dela). Plano B: usar o
+    roteador de internet do celular (hotspot).
+  - Se precisar abrir de novo: abra o Prompt de Comando na pasta,
+    rode  .venv\Scripts\activate  e depois  streamlit run app.py
+
+Demonstracao sugerida (2 a 3 minutos):
+  1. Faca uma pergunta simples.
+  2. Faca o teste de contexto (nome -> "qual e o meu nome?").
+  3. Mostre o botao "Nova conversa".
+
+O que explicar em 3 frases:
+  - "A interface de chat foi feita com Streamlit."
+  - "O LangChain faz a conexao com o Gemini, um LLM do Google
+     acessado por API."
+  - "A cada pergunta, o historico inteiro da conversa e enviado
+     junto ao modelo, e e assim que o agente mantem o contexto."
+
+Entrega: quem entrega no Teams e o Miguel. Se for preciso mandar a
+pasta de volta, compacte (zip) SEM as pastas .venv e SEM o arquivo
+.env, e nunca inclua a chave.
+
+---------------------------------------------------------------------
+PROBLEMAS COMUNS
+---------------------------------------------------------------------
+"'python' nao e reconhecido..."
+   -> Tente  py  no lugar de  python, ou reinstale o Python
+      marcando "Add python.exe to PATH".
+
+"'streamlit' nao e reconhecido..."
+   -> O ambiente virtual nao esta ativo. Rode
+      .venv\Scripts\activate  (precisa aparecer (.venv)).
+
+"Erro ao chamar o Gemini: ... API key not valid" (erro 400)
+   -> A chave foi colada errada (talvez com espaco no comeco/fim).
+      Copie de novo e cole de novo.
+
+"Erro ... 404 / model not found"
+   -> O nome do modelo mudou. Feche o app (Ctrl+C no terminal) e rode:
+          set GEMINI_MODEL=gemini-2.0-flash
+          streamlit run app.py
+
+"Erro ... 429 / quota / resource exhausted"
+   -> Limite gratuito por minuto. Espere 1 minuto e tente de novo.
+      Se persistir, gere outra chave no Passo 4.
+
+"Port 8501 is already in use"
+   -> Rode:  streamlit run app.py --server.port 8502
+
+Navegador nao abriu
+   -> Abra manualmente http://localhost:8501
+
+Para fechar o agente: no terminal, aperte Ctrl+C.
