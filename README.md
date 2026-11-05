@@ -1,4 +1,4 @@
-# Meu Primeiro Agente de IA com LLM
+# Agente de IA com o Google Gemini
 
 Agente de Inteligência Artificial que recebe perguntas em linguagem natural e responde usando um LLM (Google Gemini), mantendo o contexto da conversa.
 
